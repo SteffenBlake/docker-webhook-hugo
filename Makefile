@@ -1,6 +1,6 @@
-NAME := webhook
-TAG := latest
-IMAGE_NAME := panubo/$(NAME)
+NAME := webhook-hugo
+TAG := v1.0.0
+IMAGE_NAME := steffenblake/$(NAME)
 
 .PHONY: help build push clean
 
