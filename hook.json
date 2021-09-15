@@ -1,0 +1,7 @@
+[
+  {
+    "id": "build",
+    "execute-command": "echo Hello World",
+    "command-working-directory": "/var"
+  }
+]
