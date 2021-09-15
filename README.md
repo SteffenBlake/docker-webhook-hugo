@@ -8,4 +8,4 @@ Port `9000` is exposed.
 
 Set the following Environment Variables:
 
-* <Work in Progress>
+* (Work in Progress)
