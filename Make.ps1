@@ -1,7 +1,6 @@
 $REPO = "steffenblake/webhook-hugo"
-$VER = "1.0.0"
+$VER = "1.0.4"
 
-$OSLIST = "linux"
 $ARCHLIST = @{
     arm = "arm/v7";
     arm64 = "arm64"; 

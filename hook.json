@@ -1,7 +1,7 @@
 [
   {
     "id": "build",
-    "execute-command": "echo Hello World",
-    "command-working-directory": "/var"
+    "execute-command": "/deploy.sh",
+    "command-working-directory": "/bin"
   }
 ]

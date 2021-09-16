@@ -41,5 +41,13 @@ RUN tar xzf /usr/local/hugo/${HUGO_BINARY}.tar.gz -C /usr/local/hugo/ \
 # Install hook.json
 ADD ./hook.json /hook.json
 
+# Install build.sh
+ADD ./deploy.sh /deploy.sh
+RUN chmod +x /deploy.sh
+
+# Prep /www for mount
+RUN mkdir /www
+run chown nobody:nogroup -R /www
+
 USER webhook
 CMD ["/usr/local/bin/webhook", "-verbose", "-hotreload", "-hooks", "/hook.json"]
