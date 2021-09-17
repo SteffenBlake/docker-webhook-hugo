@@ -47,7 +47,11 @@ RUN chmod +x /deploy.sh
 
 # Prep /www for mount
 RUN mkdir /www
-run chown nobody:nogroup -R /www
+run chown webhook:webhook -R /www
+
+# Prep /temp for working in
+RUN mkdir /temp
+run chown webhook:webhook -R /temp
 
 USER webhook
 CMD ["/usr/local/bin/webhook", "-verbose", "-hotreload", "-hooks", "/hook.json"]
