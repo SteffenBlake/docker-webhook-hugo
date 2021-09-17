@@ -41,9 +41,13 @@ RUN tar xzf /usr/local/hugo/${HUGO_BINARY}.tar.gz -C /usr/local/hugo/ \
 # Install hook.json
 ADD ./hook.json /hook.json
 
-# Install build.sh
+# Install deploy.sh
 ADD ./deploy.sh /deploy.sh
 RUN chmod +x /deploy.sh
+
+# Install after-deploy.sh
+ADD ./after-deploy.sh /after-deploy.sh
+RUN chmod +x /after-deploy.sh
 
 # Prep /www for mount
 RUN mkdir /www
