@@ -1,5 +1,5 @@
 $REPO = "steffenblake/webhook-hugo"
-$VER = "1.0.10"
+$VER = "1.0.11"
 
 $ARCHLIST = @{
     arm = "arm/v7";

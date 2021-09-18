@@ -1,7 +1,7 @@
 #!/bin/ash
 
 # Fetch website
-git clone $HUGO_REPOSITORY --recurse-submodules /temp/website
+git clone -b $HUGO_BRANCH $HUGO_REPOSITORY --recurse-submodules /temp/website
 
 # Clear old website files
 rm -R /www/*
