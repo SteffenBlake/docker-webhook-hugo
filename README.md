@@ -56,6 +56,8 @@ services:
       - "9000:9000"
 ```
 
+Both of the above will now be listening on `http://localhost:9000/hooks/build`
+
 # Supported servers
 
 - [x] Gogs
