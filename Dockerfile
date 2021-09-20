@@ -39,15 +39,23 @@ RUN tar xzf /usr/local/hugo/${HUGO_BINARY}.tar.gz -C /usr/local/hugo/ \
 	&& rm /usr/local/hugo/${HUGO_BINARY}.tar.gz
 
 # Install hook.json
-ADD ./hook.json /hook.json
+ADD ./build.json /hooks/build.json
+run chown webhook:webhook -R /hooks
+
+# Install startup.sh
+ADD ./startup.sh /startup.sh
+RUN chmod +x /startup.sh
+run chown webhook:webhook -R /startup.sh
 
 # Install deploy.sh
 ADD ./deploy.sh /deploy.sh
 RUN chmod +x /deploy.sh
+run chown webhook:webhook -R /deploy.sh
 
 # Install after-deploy.sh
 ADD ./after-deploy.sh /after-deploy.sh
 RUN chmod +x /after-deploy.sh
+run chown webhook:webhook -R /after-deploy.sh
 
 # Prep /www for mount
 RUN mkdir /www
@@ -58,4 +66,4 @@ RUN mkdir /temp
 run chown webhook:webhook -R /temp
 
 USER webhook
-CMD ["/usr/local/bin/webhook", "-verbose", "-hotreload", "-hooks", "/hook.json"]
+CMD ["/bin/sh", "/startup.sh"]

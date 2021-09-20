@@ -1,0 +1,70 @@
+[
+  {
+    "id": "build",
+    "execute-command": "/deploy.sh",
+    "command-working-directory": "/bin",
+    "http-methods": ["POST"],
+    "trigger-rule":
+    {
+      "or": [ 
+        {
+          "match": {
+            "type": "payload-hmac-sha256",
+            "secret": "%HUGO_PUSH_SECRET%",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Gogs-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "payload-hmac-sha256",
+            "secret": "%HUGO_PUSH_SECRET%",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "payload-hmac-sha256",
+            "secret": "%HUGO_PUSH_SECRET%",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature-256"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "%HUGO_PUSH_SECRET%",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Gitlab-Token"
+            }
+          }
+        }
+      ]
+    },
+    "pass-environment-to-command": 
+		[
+      {
+        "envname": "WEBHOOK_REPOSITORY",
+        "source": "payload",
+        "name": "repository.clone_url"
+      },
+      {
+        "envname": "WEBHOOK_REF",
+        "source": "payload",
+        "name": "ref"
+      }
+    ]
+  }
+]

@@ -1,7 +1,0 @@
-[
-  {
-    "id": "build",
-    "execute-command": "/deploy.sh",
-    "command-working-directory": "/bin"
-  }
-]
