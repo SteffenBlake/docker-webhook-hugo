@@ -1,5 +1,5 @@
 $REPO = "steffenblake/webhook-hugo"
-$VER = "1.0.12"
+$VER = "1.0.13"
 
 $PUBLISH = $TRUE
 

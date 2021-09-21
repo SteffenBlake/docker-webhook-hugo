@@ -50,6 +50,17 @@
               "name": "X-Gitlab-Token"
             }
           }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "%HUGO_PUSH_SECRET%",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "secret"
+            }
+          }
         }
       ]
     },
