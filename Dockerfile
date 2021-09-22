@@ -23,7 +23,7 @@ MAINTAINER Steffen Blake <steffen@technically.fun>
 # Source: panubo @ https://github.com/panubo/docker-webhook/blob/master/Dockerfile
 EXPOSE 9000
 COPY --from=build /usr/local/bin/webhook /usr/local/bin/webhook
-RUN apk --no-cache --update add bash curl git wget jq ca-certificates py-pygments \
+RUN apk --no-cache --update add bash curl git wget jq ca-certificates py-pygments openssh \
   && addgroup -g 1000 webhook \
   && adduser -D -u 1000 -G webhook webhook \
   && rm -rf /var/cache/apk/*
