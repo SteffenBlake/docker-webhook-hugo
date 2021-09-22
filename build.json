@@ -67,11 +67,6 @@
     "pass-environment-to-command": 
 		[
       {
-        "envname": "WEBHOOK_REPOSITORY",
-        "source": "payload",
-        "name": "repository.clone_url"
-      },
-      {
         "envname": "WEBHOOK_REF",
         "source": "payload",
         "name": "ref"

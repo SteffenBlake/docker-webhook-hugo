@@ -14,6 +14,7 @@ The build hook is located at `/hooks/build`
 
 * `HUGO_BRANCH` - The branch name you want to trigger builds with. IE `master`
 * `HUGO_SECRET` - The Secret value you set for your webhook on the Git Server
+* `HUGO_REPOSITORY` - The Clone URL for your repo (supports ssh, use SSH url if you want to use a private repo)
 
 # Volume Mounts
 
@@ -21,6 +22,12 @@ The build hook is located at `/hooks/build`
   * **Required**
   * This is the folder the build trigger will pipe the static hugo web files out into.
   * **NOTE WHEN TRIGGERED THIS FOLDER'S CONTENTS WILL BE WIPED WITH EACH BUILD TO MAKE WAY FOR THE NEW FILES** 
+* `/path/to/authorized_keys:/home/webhook/.ssh/authorized_keys`
+  * **Required for SSH Clone**
+  * rsa-ssh key file for enabling ssh git clone
+* `/path/to/known_hosts:/home/webhook/.ssh/known_hosts`
+  * **Required for SSH Clone**
+  * known_hosts file for authorizing the ssh host. Best to ssh manually with another machine and verify the sha fingerprint to that machines `known_hosts` and then copy it over to ensure it truly is the right fingerprint.
 * `/path/to/after-deploy.sh:/after-deploy.sh`
   * **Optional**
   * Customizable **ash** (alpine) script you can override with your own custom "after build" script to perform any additional operations after the build has succeeded.
@@ -35,7 +42,7 @@ At this time, the Hugo web folder must be the root of the git repo. That is to s
 
 ## docker run
 
-`docker run -d -v /My/Website/Out/Folder:/www -p 9000:9000 -e HUGO_BRANCH=main -e HUGO_SECRET=MyPassword steffenblake/webhook-hugo`
+`docker run -d -v /My/Website/Out/Folder:/www -p 9000:9000 -e HUGO_BRANCH=main -e HUGO_SECRET=MyPassword -e HUGO_REPOSITORY=https://github.com/someone/somerepo.git steffenblake/webhook-hugo`
 
 ## docker compose
 
@@ -49,6 +56,7 @@ services:
     environment:
       - HUGO_BRANCH=main
       - HUGO_SECRET=MyPassword
+      - HUGO_REPOSITORY=https://github.com/someone/somerepo.git
     restart: always
     volumes:
       - /My/Website/Out/Folder:/www
@@ -72,10 +80,9 @@ Also, any other server software that also performs the hmac-sha256 secret algori
 - [x] `X-Hub-Signature`
 - [x] `X-Hub-Signature-256`
 
-Additionaly, the following two properties must be part of its json payload for its `Push` event:
+Additionaly, the following property must be part of its json payload for its `Push` event:
 
 - [x] `ref`
-- [x] `repository.clone_url`
 
 Finally, the webhook must be an HTTP `POST` 
 
