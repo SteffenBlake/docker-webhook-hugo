@@ -68,6 +68,6 @@ run chown webhook:webhook -R /temp
 # Prep ssh dir for working in
 RUN mkdir /home/webhook/.ssh
 run chown webhook:webhook -R /home/webhook/.ssh
-
+run chmod -R 700 /home/webhook/.ssh
 USER webhook
 CMD ["/bin/sh", "/startup.sh"]
