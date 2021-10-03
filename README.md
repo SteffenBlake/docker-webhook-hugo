@@ -10,11 +10,14 @@ Port `9000` is exposed.
 
 The build hook is located at `/hooks/build`
 
-# Required Environment Variables
+# Environment Variables
 
-* `HUGO_BRANCH` - The branch name you want to trigger builds with. IE `master`
-* `HUGO_SECRET` - The Secret value you set for your webhook on the Git Server
-* `HUGO_REPOSITORY` - The Clone URL for your repo (supports ssh, use SSH url if you want to use a private repo)
+* `HUGO_BRANCH` - (Required) The branch name you want to trigger builds with. IE `master`or `main`
+* `HUGO_SECRET` - (Required) The Secret value you set for your webhook on the Git Server
+* `HUGO_REPOSITORY` - (Required) The Clone URL for your repo (supports ssh, use SSH url if you want to use a private repo)
+* `HUGO_ARGS` - (Optional) Any additional Command Line Args / Flags you wish to pass into the Hugo Build command.
+    * See: https://gohugo.io/commands/hugo/
+    * E.G.: `"-D -F"`  
 
 # Volume Mounts
 
