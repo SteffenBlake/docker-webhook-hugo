@@ -4,7 +4,7 @@ Minimal Alpine Linux Docker image with [webhook](https://github.com/adnanh/webho
 
 ## Usage
 
-This docker image hosts a n Alpine Image with a single webhook that, when triggered by a Git server's Push event, will trigger a hugo build of that repo.
+This docker image hosts an Alpine Image with a single webhook that, when triggered by a Git server's Push event, will trigger a hugo build of that repo.
 
 Port `9000` is exposed.
 
