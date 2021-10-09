@@ -9,8 +9,24 @@ if [ "$HUGO_BRANCH" != "$refBranch" ]; then
     return 1;
 fi
 
-# Fetch website
-git clone -b $HUGO_BRANCH $HUGO_REPOSITORY --recurse-submodules /temp/website
+# Clean, then Fetch website
+rm -rf /temp/website
+
+tries=1
+echo "Attempting git clone #$tries"
+git clone -b $HUGO_BRANCH $HUGO_REPOSITORY --recurse-submodules /temp/website || :
+
+while [ ! -d "/temp/website" ] && [ "$tries" -lt "6" ]; do
+    sleep 5
+    tries=$((tries+1))
+    echo "Attempting git clone #$tries"
+    git clone -b $HUGO_BRANCH $HUGO_REPOSITORY --recurse-submodules /temp/website || :
+done
+
+if [ ! -d "/temp/website" ]; then
+    echo "Git Clone failed after $tries attempts, exiting"
+    exit 1
+fi
 
 # Clear old website files
 rm -rf /www/*
