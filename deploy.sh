@@ -13,13 +13,13 @@ fi
 git clone -b $HUGO_BRANCH $HUGO_REPOSITORY --recurse-submodules /temp/website
 
 # Clear old website files
-rm -R /www/*
+rm -rf /www/*
 
 # Build Website to www mount
 hugo -s /temp/website $HUGO_ARGS
 cp -R /temp/website/public/* /www
 
 # Cleanup
-rm -R /temp/website
+rm -rf /temp/website
 
 /bin/sh /after-deploy.sh
