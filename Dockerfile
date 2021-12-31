@@ -30,13 +30,15 @@ RUN apk --no-cache --update add bash curl git wget jq ca-certificates py-pygment
 
 # Hugo Install
 # Source: jonathanbp @ https://github.com/jonathanbp/docker-alpine-hugo/blob/master/Dockerfile
-ENV HUGO_VERSION 0.88.1
-ENV HUGO_BINARY hugo_${HUGO_VERSION}_linux-64bit
+ARG HUGO_VERSION
+ARG HUGO_ARCH
+ENV HUGO_BINARY hugo_${HUGO_VERSION}_Linux-${HUGO_ARCH}.tar.gz
+
 RUN mkdir /usr/local/hugo
-ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY}.tar.gz /usr/local/hugo/
-RUN tar xzf /usr/local/hugo/${HUGO_BINARY}.tar.gz -C /usr/local/hugo/ \
+ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} /usr/local/hugo/
+RUN tar xzf /usr/local/hugo/${HUGO_BINARY} -C /usr/local/hugo/ \
 	&& ln -s /usr/local/hugo/hugo /usr/local/bin/hugo \
-	&& rm /usr/local/hugo/${HUGO_BINARY}.tar.gz
+	&& rm /usr/local/hugo/${HUGO_BINARY}
 
 # Install hook.json
 ADD ./build.json /hooks/build.json
